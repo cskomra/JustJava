@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * This app displays an order form to order coffee.
@@ -19,12 +20,13 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
+    int pricePerCup = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view){
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view){
         if (quantity > 0){
             quantity = quantity - 1;
-            display(quantity);
+            displayQuantity(quantity);
         }
     }
 
@@ -57,18 +59,26 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Total: $" + price + "\n" + "Thank you!";
-        displayMessage(priceMessage);
+        int price = calculatePrice();
+        String message = createOrderSummary(price);
+        displayMessage(message);
     }
 
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText(Integer.toString(number));
+    }
+
+    /**
+     * Calculates the price of the order.
+     *
+     */
+    private int calculatePrice() {
+        return quantity * pricePerCup;
     }
 
     /**
@@ -77,5 +87,19 @@ public class MainActivity extends AppCompatActivity {
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    }
+
+    /**
+     * Creates a message for the order
+     * @param price
+     * @return
+     */
+    private String createOrderSummary(int price){
+        String priceMessage =
+                "Name: Connie Skomra" + "\n" +
+                "Quantity: " + quantity + "\n" +
+                "Total: $" + price + "\n" +
+                "Thank you!";
+        return priceMessage;
     }
 }
