@@ -1,6 +1,8 @@
 package com.cskomra.justjava;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,13 +31,6 @@ public class MainActivity extends AppCompatActivity {
         displayQuantity(quantity);
     }
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
 
     /**
      * This method is called when the plus button is clicked.
@@ -86,9 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
         int price = calculatePrice();
         String message = createOrderSummary(price, name);
-        displayMessage(message);
-    }
 
+        // send order to Mail intent
+        String addresses[] = {};
+        String subject = "Just Java Order for " + name;
+        composeEmail(addresses, subject, message);
+        reinitialize();
+
+    }
 
     /**
      * This method displays the given quantity value on the screen.
@@ -99,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Calculates the price of the order.
-     *
+     * Calculates the price of the order.     *
      */
     private int calculatePrice() {
         int whip = hasWhippedCream ? priceForWhip : 0;
@@ -108,6 +107,39 @@ public class MainActivity extends AppCompatActivity {
         int basePrice = pricePerCup + whip + choc;
 
         return quantity * basePrice;
+    }
+
+    public void reinitialize(){
+        // Name
+        EditText nameView = (EditText) findViewById(R.id.name_text_input);
+        nameView.setText("");
+
+        // Whipped Cream
+        CheckBox addWhipCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        addWhipCheckBox.setChecked(false);
+
+        // Chocolate
+        CheckBox addChocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        addChocolateCheckBox.setChecked(false);
+
+        //Quantity
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText("0");
+    }
+
+    /**
+     *  Send order in an email message
+     */
+    public void composeEmail(String[] addresses, String subject, String body) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
