@@ -144,10 +144,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private String createOrderSummary(int price, String name){
         return  getString(R.string.order_summary_name, name) + "\n" +
-                getString(R.string.whip_checkbox) + hasWhippedCream + "\n" +
-                getString(R.string.chocolate_checkbox) + hasChocolate + "\n" +
-                getString(R.string.quantity) + quantity + "\n" +
-                "Total: $" + price + "\n" +
-                getString(R.string.thank_you);
+                getString(R.string.order_summary_whip, hasWhippedCream) + "\n" +
+                getString(R.string.order_summary_chocolate, hasChocolate) + "\n" +
+                getString(R.string.order_summary_quantity, quantity) + "\n" +
+                getString(R.string.order_summary_price,
+                        java.text.NumberFormat.getCurrencyInstance().format(price));
     }
 }

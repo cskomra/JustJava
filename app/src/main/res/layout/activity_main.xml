@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginBottom="16dp"
-            android:hint="Your Name"
+            android:hint="@string/name"
             android:inputType="text"/>
 
         <TextView
@@ -29,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
-
-            android:text="@string/whip_checkbox" />
+            android:text="@string/add_whip" />
 
         <CheckBox
             android:id="@+id/chocolate_checkbox"
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
             android:layout_marginBottom="16sp"
-            android:text="@string/chocolate_checkbox" />
+            android:text="@string/add_chocolate" />
 
         <TextView
             android:layout_width="wrap_content"
