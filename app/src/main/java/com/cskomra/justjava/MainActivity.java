@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         displayQuantity(quantity);
     }
 
-
     /**
      * This method is called when the plus button is clicked.
      */
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         String subject = "Just Java Order for " + name;
         composeEmail(addresses, subject, message);
         reinitialize();
-
     }
 
     /**
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         int whip = hasWhippedCream ? priceForWhip : 0;
         int choc = hasChocolate ? priceForChocolate : 0;
         int basePrice = pricePerCup + whip + choc;
-
         return quantity * basePrice;
     }
 
@@ -145,13 +142,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates a message for the order
      */
-    private String createOrderSummary(int price,
-                                      String name){
-        return  "Name: " + name + "\n" +
-                "Add whipped cream? " + hasWhippedCream + "\n" +
-                "Add chocolate? " + hasChocolate + "\n" +
-                "Quantity: " + quantity + "\n" +
+    private String createOrderSummary(int price, String name){
+        return  getString(R.string.order_summary_name, name) + "\n" +
+                getString(R.string.whip_checkbox) + hasWhippedCream + "\n" +
+                getString(R.string.chocolate_checkbox) + hasChocolate + "\n" +
+                getString(R.string.quantity) + quantity + "\n" +
                 "Total: $" + price + "\n" +
-                "Thank you!";
+                getString(R.string.thank_you);
     }
 }
