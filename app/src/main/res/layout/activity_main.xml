@@ -19,10 +19,7 @@
             android:inputType="text"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8sp"
-            style="@style/CustomText"
+            style="@style/HeaderText"
             android:text="@string/toppings" />
 
         <CheckBox
@@ -41,10 +38,7 @@
             android:text="@string/add_chocolate" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16sp"
-            style="@style/CustomText"
+            style="@style/HeaderText"
             android:text="@string/quantity" />
 
         <LinearLayout
