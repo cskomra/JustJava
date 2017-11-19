@@ -24,17 +24,12 @@
 
         <CheckBox
             android:id="@+id/whipped_cream_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
+            style="@style/ToppingsCheckBox"
             android:text="@string/add_whip" />
 
         <CheckBox
             android:id="@+id/chocolate_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
-            android:layout_marginBottom="16sp"
+            style="@style/ToppingsCheckBox"
             android:text="@string/add_chocolate" />
 
         <TextView
